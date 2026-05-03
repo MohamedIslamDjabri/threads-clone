@@ -1,7 +1,8 @@
 import cron from "cron";
 import https from "https";
-
-const URL = "https://threads-clone-9if3.onrender.com";
+import dotenv from "dotenv";
+dotenv.config();
+const URL = process.env.DEPLOYMENT_URL;
 
 const job = new cron.CronJob("*/14 * * * *", function () {
 	https

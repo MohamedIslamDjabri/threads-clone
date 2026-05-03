@@ -21,7 +21,7 @@ const Post = ({ post, postedBy }) => {
 	useEffect(() => {
 		const getUser = async () => {
 			try {
-				const res = await fetch("/api/users/profile/" + postedBy);
+				const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/profile/` + postedBy,{credentials: "include",});
 				const data = await res.json();
 				if (data.error) {
 					showToast("Error", data.error, "error");
@@ -42,8 +42,9 @@ const Post = ({ post, postedBy }) => {
 			e.preventDefault();
 			if (!window.confirm("Are you sure you want to delete this post?")) return;
 
-			const res = await fetch(`/api/posts/${post._id}`, {
+			const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/posts/${post._id}`, {
 				method: "DELETE",
+				credentials: "include",
 			});
 			const data = await res.json();
 			if (data.error) {

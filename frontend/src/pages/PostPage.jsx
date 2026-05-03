@@ -25,7 +25,7 @@ const PostPage = () => {
 		const getPost = async () => {
 			setPosts([]);
 			try {
-				const res = await fetch(`/api/posts/${pid}`);
+				const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/posts/${pid}`,{credentials: "include",});
 				const data = await res.json();
 				if (data.error) {
 					showToast("Error", data.error, "error");
@@ -43,8 +43,9 @@ const PostPage = () => {
 		try {
 			if (!window.confirm("Are you sure you want to delete this post?")) return;
 
-			const res = await fetch(`/api/posts/${currentPost._id}`, {
+			const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/posts/${currentPost._id}`, {
 				method: "DELETE",
+				credentials: "include",
 			});
 			const data = await res.json();
 			if (data.error) {

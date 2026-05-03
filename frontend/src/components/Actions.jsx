@@ -36,11 +36,12 @@ const Actions = ({ post }) => {
 		if (isLiking) return;
 		setIsLiking(true);
 		try {
-			const res = await fetch("/api/posts/like/" + post._id, {
+			const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/posts/like/` + post._id, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
+				credentials: "include",
 			});
 			const data = await res.json();
 			if (data.error) return showToast("Error", data.error, "error");
@@ -78,12 +79,13 @@ const Actions = ({ post }) => {
 		if (isReplying) return;
 		setIsReplying(true);
 		try {
-			const res = await fetch("/api/posts/reply/" + post._id, {
+			const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/posts/reply/` + post._id, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({ text: reply }),
+				credentials: "include",
 			});
 			const data = await res.json();
 			if (data.error) return showToast("Error", data.error, "error");
